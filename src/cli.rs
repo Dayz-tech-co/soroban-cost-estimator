@@ -58,6 +58,11 @@ pub enum Command {
         /// Output as JSON instead of a human-readable table.
         #[arg(long)]
         json: bool,
+
+        /// Run the simulation N times and report min/max/avg/p95 RPC latency
+        /// and fee variance across the runs (benchmarking). Defaults to 1.
+        #[arg(long, value_name = "N", default_value_t = 1, value_parser = clap::value_parser!(u64).range(1..))]
+        repeat: u64,
     },
 
     /// Enumerate all public contract functions and estimate each one.
